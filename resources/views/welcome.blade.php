@@ -26,18 +26,11 @@
   
 <div class="container">
   
-    <h1>Laravel 8 - Stripe Payment Gateway Integration Example <br/> Expert Rohila</h1>
   
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-default credit-card-box">
-                <div class="panel-heading display-table" >
-                    <div class="row display-tr" >
-                        <h3 class="panel-title display-td" >Payment Details</h3>
-                        <div class="display-td" >                            
-                            <img class="img-responsive pull-right" src="http://i76.imgup.net/accepted_c22e0.png">
-                        </div>
-                    </div>                    
+                <div class="panel-heading display-table" >                   
                 </div>
                 <div class="panel-body">
   
@@ -100,7 +93,7 @@
   
                         <div class="row">
                             <div class="col-xs-12">
-                                <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now ($100)</button>
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now</button>
                             </div>
                         </div>
                           
