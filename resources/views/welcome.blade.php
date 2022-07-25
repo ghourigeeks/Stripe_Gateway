@@ -3,6 +3,7 @@
 <head>
     <title>Laravel 8 - Stripe Payment Gateway Integration Example - ItSolutionStuff.com</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="shortcut icon" href="https://stripe.com/img/v3/home/twitter.png"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <style type="text/css">
         .panel-title {
@@ -26,11 +27,18 @@
   
 <div class="container">
   
+    <h3 align="center" style="margin: 50px 0;">Laravel 8 - Stripe Payment Gateway Integration <br/><b>Geeksroot</b></h3>
   
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-default credit-card-box">
-                <div class="panel-heading display-table" >                   
+                <div class="panel-heading display-table" style="width: 100%;">
+                    <div class="row display-tr" >
+                        <h3 class="panel-title display-td" >Payment Details</h3>
+                        <div class="display-td" >                            
+                            <img class="img-responsive pull-right" width="100px" src="https://woocommerce.com/wp-content/uploads/2011/12/stripe-logo-blue.png">
+                        </div>
+                    </div>                    
                 </div>
                 <div class="panel-body">
   
@@ -54,34 +62,51 @@
                         <div class='form-row row'>
                             <div class='col-xs-12 form-group required'>
                                 <label class='control-label'>Name on Card</label> <input
-                                    class='form-control' size='4' type='text'>
+                                   value="{{old('card_name')}}" name="card_name" class='form-control' size='4' type='text'>
                             </div>
                         </div>
+
+                        @if($errors->has('card_name'))
+                            <div class="error text-danger">{{ $errors->first('card_name') }}</div>
+                        @endif
   
                         <div class='form-row row'>
                             <div class='col-xs-12 form-group card required'>
                                 <label class='control-label'>Card Number</label> <input
-                                    autocomplete='off' class='form-control card-number' size='20'
+                                    value="{{old('card_number')}}" name="card_number" autocomplete='off' class='form-control card-number' size='20'
                                     type='text'>
                             </div>
                         </div>
+
+                        @if($errors->has('card_number'))
+                            <div class="error text-danger">{{ $errors->first('card_number') }}</div>
+                        @endif
   
                         <div class='form-row row'>
                             <div class='col-xs-12 col-md-4 form-group cvc required'>
                                 <label class='control-label'>CVC</label> <input autocomplete='off'
-                                    class='form-control card-cvc' placeholder='ex. 311' size='4'
+                                    value="{{old('cvc')}}" name="cvc" class='form-control card-cvc' placeholder='ex. 311' size='4'
                                     type='text'>
                             </div>
+                            @if($errors->has('cvc'))
+                                <div class="error text-danger">{{ $errors->first('cvc') }}</div>
+                            @endif
                             <div class='col-xs-12 col-md-4 form-group expiration required'>
                                 <label class='control-label'>Expiration Month</label> <input
-                                    class='form-control card-expiry-month' placeholder='MM' size='2'
+                                    value="{{old('exp_month')}}" name="exp_month" class='form-control card-expiry-month' placeholder='MM' size='2'
                                     type='text'>
                             </div>
+                            @if($errors->has('exp_month'))
+                                <div class="error text-danger">{{ $errors->first('exp_month') }}</div>
+                            @endif
                             <div class='col-xs-12 col-md-4 form-group expiration required'>
                                 <label class='control-label'>Expiration Year</label> <input
-                                    class='form-control card-expiry-year' placeholder='YYYY' size='4'
+                                    value="{{old('exp_year')}}" name="exp_year" class='form-control card-expiry-year' placeholder='YYYY' size='4'
                                     type='text'>
                             </div>
+                            @if($errors->has('exp_year'))
+                                <div class="error text-danger">{{ $errors->first('exp_year') }}</div>
+                            @endif
                         </div>
   
                         <div class='form-row row'>
@@ -93,7 +118,7 @@
   
                         <div class="row">
                             <div class="col-xs-12">
-                                <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now</button>
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Pay Now ($150)</button>
                             </div>
                         </div>
                           
@@ -154,7 +179,7 @@ $(function() {
                 .find('.alert')
                 .text(response.error.message);
         } else {
-            /* token contains id, last4, and card type */
+            / token contains id, last4, and card type /
             var token = response['id'];
                
             $form.find('input[type=text]').empty();

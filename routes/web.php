@@ -21,3 +21,4 @@ Route::get('/', function () {
 
 Route::post('/stripe', [StripeController::class,'stripePyament'])->name("stripe.post");
 
+
